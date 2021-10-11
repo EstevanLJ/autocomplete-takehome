@@ -1,19 +1,9 @@
-import React from 'react';
-import {shallow} from 'enzyme';
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import Autocomplete from './components/Autocomplete/Autocomplete';
 
-test('renders learn react link', () => {
+test('renders autocomplete input', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  
-  
-
-  expect(linkElement).toBeInTheDocument();
+  const inputElement = screen.getByTestId('autocomplete-input');
+  expect(inputElement).toBeInTheDocument();
 });
 
-test('renders Autocomplete component', () => {
-  const wrapper = shallow(<App />);
-  expect(wrapper.containsMatchingElement(Autocomplete)).toEqual(true);
-});

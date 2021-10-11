@@ -12,9 +12,13 @@ export interface Country {
 export const searchCountry = async (query: string): Promise<Country[]> => {
   let countries: Country[] = await getCountries();
 
-  return countries.filter((country: Country) => {
-    return country.name.toUpperCase().indexOf(query) == 0;
+  let term = query.toUpperCase();
+
+  let filtered = countries.filter((country: Country) => {
+    return country.name.toUpperCase().indexOf(term) == 0;
   });
+
+  return filtered.slice(0, 100);
 };
 
 export const getCountries = async (): Promise<Country[]> => {
@@ -27,7 +31,7 @@ export const getCountries = async (): Promise<Country[]> => {
   return countries;
 };
 
-const retrieveCountries = async (): Promise<Country[]> => {
+export const retrieveCountries = async (): Promise<Country[]> => {
   return new Promise((resolve, reject) => {
     readFile(
       "src/data/countries.csv",

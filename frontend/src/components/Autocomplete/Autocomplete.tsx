@@ -49,6 +49,7 @@ const Autocomplete = (props: AutocompleteProps) => {
         <div className="Autocomplete__Label">{props.label}</div>
 
         <input
+          data-testid="autocomplete-input"
           className="Autocomplete__Input"
           value={query}
           onChange={handleChange}
@@ -63,6 +64,7 @@ const Autocomplete = (props: AutocompleteProps) => {
           <div className="Autocomplete__Results">
             {results.map((country: Country) => (
               <div
+                data-testid={`autocomplete-result-${country.country}`}
                 key={country.country}
                 className="Autocomplete__ResultItem"
                 onClick={() => handleResultClick(country)}
