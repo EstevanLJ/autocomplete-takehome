@@ -1,7 +1,7 @@
 import Autocomplete from "./components/Autocomplete/Autocomplete";
 import "./App.css";
 import { useState } from "react";
-import Country from "./interfaces/country";
+import { Country } from "./interfaces";
 
 const App = () => {
   const [country, setCountry] = useState<Country | null>(null);

@@ -8,6 +8,8 @@ COPY . .
 
 RUN npm install
 
+RUN rm -Rf ./dist
+
 RUN npm run build
 
 CMD ["npm", "start"]

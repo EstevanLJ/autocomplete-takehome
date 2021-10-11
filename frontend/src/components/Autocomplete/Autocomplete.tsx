@@ -1,22 +1,9 @@
-import axios, { AxiosResponse } from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import Country from "../../interfaces/country";
+import { AutocompleteProps, Country } from "../../interfaces";
+import { search } from "../../services/countryApi";
 import "./Autocomplete.css";
 
-interface ApiResult {
-  results: Country[];
-}
-
-interface OnChangeIProps {
-  (value: Country | null): void;
-}
-
-interface IProps {
-  label: string;
-  onChange: OnChangeIProps;
-}
-
-const Autocomplete = (props: IProps) => {
+const Autocomplete = (props: AutocompleteProps) => {
   const [searching, setSearching] = useState<boolean>(false);
   const [results, setResults] = useState<Country[]>([]);
   const [query, setQuery] = useState<string>("");
@@ -43,21 +30,17 @@ const Autocomplete = (props: IProps) => {
     }
   };
 
-  const search = (query: string) => {
-    axios
-      .get(`http://localhost:5000/search?q=${query}`)
-      .then((res: AxiosResponse<ApiResult>) => {
-        setResults(res.data.results);
-      });
-  };
-
   useEffect(() => {
     if (query === "" || !searching) {
       setResults([]);
       return;
     }
 
-    search(query);
+    search(query)
+      .then((data: Country[]) => {
+        setResults(data);
+      })
+      .catch(() => setResults([]));
   }, [query, searching]);
 
   return (
