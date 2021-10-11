@@ -22,6 +22,13 @@ UI tests:
 docker-compose up -d
 ```
 
+Go to: http://localhost:3000
+
+API request:
+```
+curl --request GET http://localhost:5000/search?q=united | json_pp
+```
+
 ## Running UI tests
 
 ```
